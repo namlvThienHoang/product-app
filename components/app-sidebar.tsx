@@ -25,6 +25,8 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { useUser } from "@/hooks/useUser"
+import { AuthResponse } from "@/types/auth"
 
 // This is sample data.
 const data = {
@@ -156,7 +158,20 @@ const data = {
   ],
 }
 
+const userDefault: AuthResponse = {
+  id: 0, // Default ID, adjust as necessary
+  username: "guest", // Default username
+  email: "guest@example.com", // Default email
+  firstName: "Guest", // Default first name
+  lastName: "User", // Default last name
+  gender: "Not Specified", // Default gender
+  image: "/path/to/default/avatar.jpg", // Path to a default image
+  accessToken: "", // Default empty token
+  refreshToken: "", // Default empty token
+};
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useUser();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -167,7 +182,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+      {!user ? <NavUser user={userDefault} /> : <NavUser user={user} />}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
