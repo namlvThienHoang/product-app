@@ -1,23 +1,12 @@
-import config from '@/utils/config';
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import api from '@/lib/axiosInstance';
+import axios, {  AxiosResponse } from 'axios';
 
 
 export class BaseService {
-  private axiosInstance: AxiosInstance;
-
-  constructor() {
-    this.axiosInstance = axios.create({
-      baseURL: config.BACKEND_URL,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }
-
   // Generic GET method
   async get<T>(endpoint: string): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.get(endpoint);
+      const response: AxiosResponse<T> = await api.get(endpoint);
       return response.data;  // Đảm bảo trả về kết quả trong mọi trường hợp
     } catch (error) {
       return this.handleError(error, `GET from ${endpoint}`);  // Trả về lỗi
@@ -27,7 +16,7 @@ export class BaseService {
   // Generic POST method
   async post<T>(endpoint: string, data: any): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.post(endpoint, data);
+      const response: AxiosResponse<T> = await api.post(endpoint, data);
       return response.data;
     } catch (error) {
       return this.handleError(error, `POST to ${endpoint}`);
@@ -37,7 +26,7 @@ export class BaseService {
   // Generic PUT method
   async put<T>(endpoint: string, data: any): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.put(endpoint, data);
+      const response: AxiosResponse<T> = await api.put(endpoint, data);
       return response.data;
     } catch (error) {
       return this.handleError(error, `PUT to ${endpoint}`);
@@ -47,7 +36,7 @@ export class BaseService {
   // Generic DELETE method
   async delete<T>(endpoint: string): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.delete(endpoint);
+      const response: AxiosResponse<T> = await api.delete(endpoint);
       return response.data;
     } catch (error) {
       return this.handleError(error, `DELETE from ${endpoint}`);

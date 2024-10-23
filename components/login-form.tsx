@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Icons } from "./icons";
 
 export function LoginForm() {
   const [username, setUsername] = useState('');
@@ -20,14 +21,18 @@ export function LoginForm() {
   const [error, setError] = useState('');
   const { login } = useAuth();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true)
     try {
       await login(username, password);
       router.push('/dashboard'); // Redirect to the dashboard after login
+      setIsLoading(false)
     } catch (err) {
       setError('Failed to login. Please check your credentials.');
+      setIsLoading(false)
     }
   };
 
@@ -68,7 +73,10 @@ export function LoginForm() {
               />
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <Button type="submit" className="w-full">
+            <Button type="submit" disabled={isLoading} className="w-full">
+            {isLoading && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
               Login
             </Button>
             <Button variant="outline" className="w-full">

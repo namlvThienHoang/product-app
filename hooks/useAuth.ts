@@ -38,12 +38,18 @@ export const useAuth = () => {
 
   const login = async (username: string, password: string) => {
     const data = await authService.login(username, password);
-    if(data) addUser(data);
+    if(data) {
+      addUser(data);
+      localStorage.setItem('token', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
+    }
     return data;
   };
 
   const logout = () => {
     removeUser();
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
   };
 
   return { user, login, logout, refresh };
