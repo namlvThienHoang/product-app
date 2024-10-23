@@ -1,11 +1,13 @@
+import config from '@/utils/config';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+
 
 export class BaseService {
   private axiosInstance: AxiosInstance;
 
-  constructor(baseUrl: string) {
+  constructor() {
     this.axiosInstance = axios.create({
-      baseURL: baseUrl,
+      baseURL: config.BACKEND_URL,
       headers: {
         'Content-Type': 'application/json',
       },

@@ -1,4 +1,4 @@
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!user) {
-      router.push('/auth/login'); // Redirect to login if not authenticated
+      router.push('/login'); // Redirect to login if not authenticated
     }
   }, [user, router]);
 

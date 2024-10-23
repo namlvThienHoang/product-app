@@ -4,7 +4,7 @@ import config from '@/utils/config';
 
 class ProductService extends BaseService {
   constructor() {
-    super(config.BACKEND_URL);
+    super();
   }
 
   async getProducts(): Promise<ProductResponse> {
