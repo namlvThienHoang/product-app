@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ESNext", // Bạn có thể đặt giá trị khác ở đây
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

@@ -1,0 +1,1 @@
+export const enumCategories = ["beauty", "fragrances", "furniture"];

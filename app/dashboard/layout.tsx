@@ -29,7 +29,6 @@ export default function RootLayout({
 }>) {
   return (
     <Providers>
-
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
