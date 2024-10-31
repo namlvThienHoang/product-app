@@ -52,53 +52,6 @@ export function getColumns(): ColumnDef<Product>[] {
       enableHiding: false,
     },
     {
-      accessorKey: "title",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Title" />
-      ),
-      cell: ({ row }) => <div>{row.getValue("title")}</div>,
-      enableSorting: false,
-      enableHiding: false,
-    },
-    {
-      accessorKey: "description",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Description" />
-      ),
-      cell: ({ row }) => <div>{row.getValue("description")}</div>,
-      enableSorting: false,
-      enableHiding: false,
-    },
-    {
-      accessorKey: "category",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Category" />
-      ),
-      cell: ({ row }) => {
-        const label = enumCategories.find(
-          (label) => label === row.original.category
-        )
-
-        return (
-          <div className="flex space-x-2">
-            {label && <Badge variant="outline">{label}</Badge>}
-            <span className="max-w-[31.25rem] truncate font-medium">
-              {row.getValue("title")}
-            </span>
-          </div>
-        )
-      },
-    },
-    {
-      accessorKey: "price",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Price" />
-      ),
-      cell: ({ row }) => <div className="w-20">{row.getValue("price")}</div>,
-      enableSorting: false,
-      enableHiding: false,
-    },
-    {
       accessorKey: "thumbnail",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Thumbnail" />
@@ -118,6 +71,54 @@ export function getColumns(): ColumnDef<Product>[] {
         )
       },
     },
+    {
+      accessorKey: "title",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Title" />
+      ),
+      cell: ({ row }) => <div>{row.getValue("title")}</div>,
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      accessorKey: "description",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Description" />
+      ),
+      cell: ({ row }) => <div className="w-80">{row.getValue("description")}</div>,
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      accessorKey: "category",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Category" />
+      ),
+      cell: ({ row }) => {
+        const label = enumCategories.find(
+          (label) => label === row.original.category
+        )
+
+        return (
+          <div className="flex space-x-2">
+            {label && <Badge variant="outline">{label}</Badge>}
+            <span className="max-w-[31.25rem] truncate font-medium">
+              {row.getValue("category")}
+            </span>
+          </div>
+        )
+      },
+    },
+    {
+      accessorKey: "price",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Price" />
+      ),
+      cell: ({ row }) => <div className="w-20">{row.getValue("price")}</div>,
+      enableSorting: false,
+      enableHiding: false,
+    },
+   
     {
       accessorKey: "meta.createdAt",
       header: ({ column }) => (
